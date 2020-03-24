@@ -86,7 +86,7 @@ public class Dealer {
         manageEndOfGame();
     }
 
-    private void manageCardsFight(Card card1, Card card2){
+    private void manageCardsFight(Card card1, Card card2) {
         int statToCompare = input.askForStatToCompare();
         int comparisonResult = compareCards(card1, card2, statToCompare);
         manageCardsAfterRound(card1, card2, comparisonResult);
@@ -169,6 +169,7 @@ public class Dealer {
         for(Card card: tempStack){
             player.takeWonCard(card);
         }
+        tempStack.clear();
     }
 
     private void changeCurrentPlayer(){
