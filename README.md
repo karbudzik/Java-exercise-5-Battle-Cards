@@ -5,8 +5,8 @@ A theme of the following implementation of the game are viruses. Each virus has 
 ## UML class diagram
 The class diagram was discussed and drawn at the beginning of the development process. The structure was based on implementing:
 * **5 packages:** application, interactions, card, deck and player 
-* 4 interfaces: Comparator, Comparable, Iterator (given by JAva) and DeckDAO (custom interface)
-* several mixed design patterns: DAO, MVC, template method and decorator pattern.
+* **4 interfaces**: Comparator, Comparable, Iterator (given by JAva) and DeckDAO (custom interface)
+* several mixed **design patterns**: DAO, MVC, template method and decorator pattern.
 
 !["Program UML diagram"](src/main/resources/img/UML.png)
 
@@ -40,6 +40,7 @@ After 10-th round the won cards are counted and player with bigger amount of car
 * planning group work, project management
 * getting familiar with 4 design patterns
 * working with git branches and pull requests
+* reading data from .csv and .xml files
 * implementing methods required by Comparator and Comparable interfaces
 * implementing hashCode and equals methods, using enums
 
