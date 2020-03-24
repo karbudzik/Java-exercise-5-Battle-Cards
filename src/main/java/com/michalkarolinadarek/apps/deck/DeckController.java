@@ -38,13 +38,11 @@ public class DeckController {
     private Card getRandomCard(){
         ArrayList<Card> leftOvers = new ArrayList<>();
         for (Card card : cardsFromDeckDAOWithCopies){
-            if(card.getHasOwner() == false){
+            if(!card.getHasOwner()){
                 leftOvers.add(card);
             }
         }
-        Card randomCardforPlayer = leftOvers.get(random.nextInt(leftOvers.size())); 
-
-        return randomCardforPlayer;
+        return leftOvers.get(random.nextInt(leftOvers.size()));
     }
    
     public void drawCardsForPlayers(int countOfPLeayers, int numberOfCards){

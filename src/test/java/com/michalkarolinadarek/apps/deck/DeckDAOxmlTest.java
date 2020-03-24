@@ -14,24 +14,11 @@ public class DeckDAOxmlTest {
     @org.junit.Test
     public void writeXmlFile() {
         DeckDAOxml dao;
-
         try {
             dao = new DeckDAOxml("src/main/resources/virus.xml");
             dao.writeXmlFile(dao.getDeck());
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TransformerConfigurationException e) {
-            // error with transform settings
-            e.printStackTrace();
-        } catch (TransformerException e) {
-            //error with transform cause
+        } catch (ParserConfigurationException | SAXException | IOException | TransformerException e) {
             e.printStackTrace();
         }
-
-
     }
 }

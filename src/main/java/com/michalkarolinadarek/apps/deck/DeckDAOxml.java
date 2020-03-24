@@ -27,28 +27,20 @@ public class DeckDAOxml implements  DeckDAOInterface{
     }
     private void openFile(String filepath) throws ParserConfigurationException, SAXException, IOException{
 
-        //creating a constructor of file class and parsing an XML file
         File file = new File(filepath);
-        //an instance of factory that gives a document builder
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        //an instance of builder to parse the specified xml file
         DocumentBuilder db = dbf.newDocumentBuilder();
-
         Document doc = db.parse(file);
         doc.getDocumentElement().normalize();
 
         fillDeck(doc);
-
     }
 
     private void fillDeck(Document doc){
         NodeList nodeList = doc.getElementsByTagName("card");
-        // nodeList is not iterable, so we are using for loop
-        for (int itr = 0; itr < nodeList.getLength(); itr++)
-        {
+        for (int itr = 0; itr < nodeList.getLength(); itr++) {
             Node node = nodeList.item(itr);
-            if (node.getNodeType() == Node.ELEMENT_NODE)
-            {
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) node;
                 virus[0] = eElement.getElementsByTagName("name").item(0).getTextContent();
                 virus[1] = eElement.getElementsByTagName("type").item(0).getTextContent();
@@ -59,7 +51,6 @@ public class DeckDAOxml implements  DeckDAOInterface{
                 virus[6] = eElement.getElementsByTagName("panic_level").item(0).getTextContent();
                 Card card = new Card(virus);
                 deck.add(card);
-
             }
         }
     }
@@ -70,15 +61,14 @@ public class DeckDAOxml implements  DeckDAOInterface{
         transFactory.setAttribute("indent-number", indent);
         Transformer aTransformer = transFactory.newTransformer();
         aTransformer.setOutputProperty(OutputKeys.INDENT, "yes");
+
         return aTransformer;
     }
 
     public void writeXmlFile(List<Card> listOfCards) throws TransformerException, ParserConfigurationException, IOException {
-
         Transformer aTransformer = getTransformer();
         DOMSource source = getDomStructure(listOfCards);
-
-        FileWriter fileWriter = new FileWriter("src/main/resources/virus2.xml"); //replace filepath when done
+        FileWriter fileWriter = new FileWriter("src/main/resources/virus2.xml");
         StreamResult result = new StreamResult(fileWriter);
         aTransformer.transform(source, result);
     }
@@ -87,11 +77,10 @@ public class DeckDAOxml implements  DeckDAOInterface{
         List<Integer> data;
         data = Arrays.asList(card.getType(), card.getInfectvity(), card.getDeaths(), card.getIncubation(), card.getPainfulness(), card.getPanicLevel());
         HashMap<String, Integer> param = new HashMap<>();
-        Integer index = 0;
+        int index = 0;
         for (String title : titles) {
             param.put(title, data.get(index++));
         }
-
         return param;
     }
 
@@ -103,21 +92,19 @@ public class DeckDAOxml implements  DeckDAOInterface{
         DocumentBuilder db = dbf.newDocumentBuilder();
         Document doc = db.newDocument();
 
-        //Initialize root as viruses
         Element root = doc.createElement("viruses");
         doc.appendChild(root);
 
         for (Card card : listOfCards) {
             parameters = getParameters(titles, card);
 
-            //Initialize single card
             Element eCard = doc.createElement("card");
             root.appendChild(eCard);
-            //Initialize card name
+
             Element Details = doc.createElement("name");
             Details.appendChild(doc.createTextNode(String.format("%s", card.getName())));
             eCard.appendChild(Details);
-            //Initialize card stat
+
             for(String title: titles){
                 Details = doc.createElement(title);
                 Details.appendChild(doc.createTextNode(String.format("%s", parameters.get(title))));
@@ -129,13 +116,11 @@ public class DeckDAOxml implements  DeckDAOInterface{
 
     @Override
     public List<Card> getDeck() {
-
         return deck;
     }
 
     @Override
     public Card getCard(int index) {
-
         return deck.get(index);
     }
 
@@ -144,15 +129,8 @@ public class DeckDAOxml implements  DeckDAOInterface{
         this.deck = deck;
         try {
             writeXmlFile(deck);
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TransformerConfigurationException e) {
-            // error with transform settings
-            e.printStackTrace();
-        } catch (TransformerException e) {
-            //error with transform cause
+        }
+        catch (ParserConfigurationException | IOException | TransformerException e) {
             e.printStackTrace();
         }
     }
@@ -163,15 +141,7 @@ public class DeckDAOxml implements  DeckDAOInterface{
         deck.add(index, card);
         try {
             writeXmlFile(deck);
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TransformerConfigurationException e) {
-            // error with transform settings
-            e.printStackTrace();
-        } catch (TransformerException e) {
-            //error with transform cause
+        } catch (ParserConfigurationException | IOException | TransformerException e) {
             e.printStackTrace();
         }
     }
@@ -181,15 +151,7 @@ public class DeckDAOxml implements  DeckDAOInterface{
         deck.remove(card);
         try {
             writeXmlFile(deck);
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TransformerConfigurationException e) {
-            // error with transform settings
-            e.printStackTrace();
-        } catch (TransformerException e) {
-            //error with transform cause
+        } catch (ParserConfigurationException | IOException | TransformerException e) {
             e.printStackTrace();
         }
     }
@@ -199,18 +161,9 @@ public class DeckDAOxml implements  DeckDAOInterface{
         deck.remove(index);
         try {
             writeXmlFile(deck);
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TransformerConfigurationException e) {
-            // error with transform settings
-            e.printStackTrace();
-        } catch (TransformerException e) {
-            //error with transform cause
+        } catch (ParserConfigurationException | TransformerException | IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -218,15 +171,7 @@ public class DeckDAOxml implements  DeckDAOInterface{
         deck.clear();
         try {
             writeXmlFile(deck);
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TransformerConfigurationException e) {
-            // error with transform settings
-            e.printStackTrace();
-        } catch (TransformerException e) {
-            //error with transform cause
+        } catch (ParserConfigurationException | IOException | TransformerException e) {
             e.printStackTrace();
         }
     }
@@ -236,15 +181,7 @@ public class DeckDAOxml implements  DeckDAOInterface{
         deck.add(card);
         try {
             writeXmlFile(deck);
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TransformerConfigurationException e) {
-            // error with transform settings
-            e.printStackTrace();
-        } catch (TransformerException e) {
-            //error with transform cause
+        } catch (ParserConfigurationException | IOException | TransformerException e) {
             e.printStackTrace();
         }
     }

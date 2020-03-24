@@ -105,5 +105,4 @@ public class DeckDAOcsv implements DeckDAOInterface {
         deck.add(card);
         saveToFile(prepareToSave());
     }
-  
 }

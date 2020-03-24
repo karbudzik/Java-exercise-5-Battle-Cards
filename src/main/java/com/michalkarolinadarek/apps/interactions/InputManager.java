@@ -13,9 +13,8 @@ public class InputManager {
         view.print(message);
         view.printEmptyChar();
         Scanner scannerFromUser = new Scanner(System.in);
-        String input = scannerFromUser.nextLine();
-        
-        return input;
+
+        return scannerFromUser.nextLine();
     }
 
     private int getIntInput(String message) {
@@ -29,7 +28,6 @@ public class InputManager {
             scannerFromUser.next();
         }
         input = scannerFromUser.nextInt();
-        
         return input;
     }
 
@@ -39,7 +37,6 @@ public class InputManager {
         while (name.length() < 1) {
             name = getStringInput("Wrong input! What's your name?");
         }
-
         return name;
     }
 
@@ -54,7 +51,6 @@ public class InputManager {
             statNumber = getIntInput(String.format("Wrong input! type the number between 1 and %d", 
                                                     listOfStats.length));
         }
-
         return statNumber;
     }
 }

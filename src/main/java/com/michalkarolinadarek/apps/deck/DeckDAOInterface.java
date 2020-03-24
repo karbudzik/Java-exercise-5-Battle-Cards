@@ -6,20 +6,19 @@ import com.michalkarolinadarek.apps.cards.Card;
 
 public interface DeckDAOInterface {
 
-     public List<Card> getDeck();
+     List<Card> getDeck();
 
-     public Card getCard(int index);
+     Card getCard(int index);
 
-     public void updateDeck(List<Card> deck);
+     void updateDeck(List<Card> deck);
 
-     public void updateCard(Card card, int index);
+     void updateCard(Card card, int index);
 
-     public void deleteCard(Card card);
+     void deleteCard(Card card);
 
-     public void deleteCard(int index);
+     void deleteCard(int index);
 
-     public void deleteDeck();
+     void deleteDeck();
 
-     public void addCard(Card card);
-     
+     void addCard(Card card);
 }

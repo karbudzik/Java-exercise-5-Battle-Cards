@@ -2,8 +2,6 @@ package com.michalkarolinadarek.apps.cards;
 
 import java.util.HashMap;
 
-import static com.michalkarolinadarek.apps.cards.Attributes.*;
-
 public class Card implements Comparable<Card>, Cloneable {
 
     private String name;
@@ -21,7 +19,7 @@ public class Card implements Comparable<Card>, Cloneable {
     }
     
     public HashMap<String, Integer> loadParametersOfCard(String[] cardParameters){
-        parametersMap = new HashMap<String, Integer>();
+        parametersMap = new HashMap<>();
         for(int index = 2; index < titles.length ; index++){
             parametersMap.put(titles[index], Integer.parseInt(cardParameters[index]));
         }
@@ -46,7 +44,7 @@ public class Card implements Comparable<Card>, Cloneable {
     @Override
     public String toString() throws IndexOutOfBoundsException {
         String output = name.toUpperCase() + "\n" + "\n";
-        Integer indexUnitForParameters = 0;
+        int indexUnitForParameters = 0;
         for(String key: titles){
             if(parametersMap.containsKey(key)) {
                 String unit = unitsForParameters[indexUnitForParameters];
@@ -57,20 +55,18 @@ public class Card implements Comparable<Card>, Cloneable {
         return output;
     }
     
-    public boolean equals(Card secondCard){
-        if(secondCard == null){
+    public boolean equals(Card secondCard) {
+        if (secondCard == null) {
             return false;
-        }
-        if(!this.parametersMap.equals(secondCard.parametersMap)){
+        } else if (!this.parametersMap.equals(secondCard.parametersMap)) {
             return false;
-        }
-        if(!this.name.equals(secondCard.name)){
+        } else if (!this.name.equals(secondCard.name)) {
             return false;
-        }
-        if(!this.type.equals(secondCard.type)){
+        } else if (!this.type.equals(secondCard.type)) {
             return false;
+        } else {
+            return true;
         }
-        return true;
     }
 
     public int hashCode(){
@@ -96,12 +92,11 @@ public class Card implements Comparable<Card>, Cloneable {
     }
 
     public int getInfectvity(){
-        return parametersMap.get(titles[Attributes.INFECTVITY.getIndex()]);
+        return parametersMap.get(titles[Attributes.INFECTIVITY.getIndex()]);
     }
 
     public int getPainfulness(){
-        Integer integer = parametersMap.get(titles[Attributes.PAINFULNESS.getIndex()]);
-        return integer;
+        return parametersMap.get(titles[Attributes.PAINFULNESS.getIndex()]);
     }
 
     public int getPanicLevel(){

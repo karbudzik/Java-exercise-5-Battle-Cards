@@ -6,16 +6,9 @@ import com.michalkarolinadarek.apps.cards.Card;
 
 class Hand {
     private List<Card> cardsToUse;
-    private UsedPile usedPileCards;
 
-    Hand(UsedPile usedPile){
-        cardsToUse = new ArrayList<Card>();
-        usedPileCards = usedPile;
-    }
-
-
-    void moveToUsedPile(com.michalkarolinadarek.apps.cards.Card card){
-        usedPileCards.addToUsedPile(card);
+    Hand(){
+        cardsToUse = new ArrayList<>();
     }
 
     Card removeCard(){

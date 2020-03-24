@@ -2,11 +2,11 @@ package com.michalkarolinadarek.apps.cards;
 
 enum Attributes {
     
-    INFECTVITY(2), DEATHS(3), INCUBATION(4), PAINFULNESS(5), PANIC_LEVEL(6);
+    INFECTIVITY(2), DEATHS(3), INCUBATION(4), PAINFULNESS(5), PANIC_LEVEL(6);
 
     private int index;
 
-    private Attributes(int index) { 
+    Attributes(int index) {
         this.index = index; 
     } 
 

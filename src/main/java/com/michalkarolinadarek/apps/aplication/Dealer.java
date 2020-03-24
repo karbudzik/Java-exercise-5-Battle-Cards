@@ -32,18 +32,18 @@ public class Dealer {
     private List<Integer> gameResults;
     private AbstractPlayer winner;
 
-    public Dealer()
-            throws FileNotFoundException, CloneNotSupportedException, ParserConfigurationException, SAXException, IOException {
+    public Dealer() throws FileNotFoundException, CloneNotSupportedException,
+                           ParserConfigurationException, SAXException, IOException {
         initializeDeckController();
         view = new TerminalView();
         input = new InputManager();
         playersList = new ArrayList<>();
         tempStack = new ArrayList<>();
-        gameResults = new ArrayList<Integer>();
+        gameResults = new ArrayList<>();
     }
 
-    private void initializeDeckController()
-            throws FileNotFoundException, CloneNotSupportedException, ParserConfigurationException, SAXException, IOException {
+    private void initializeDeckController() throws FileNotFoundException, CloneNotSupportedException,
+                                                   ParserConfigurationException, SAXException, IOException {
         deckController = new DeckController(new DeckDAOxml("src/main/resources/virus.xml"));
     }
     

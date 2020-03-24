@@ -11,7 +11,7 @@ public class HumanPlayer extends AbstractPlayer {
     public HumanPlayer(String name){
         this.name = name;
         usedPile = new UsedPile();
-        hand = new Hand(usedPile);
+        hand = new Hand();
     }
 
     @Override
@@ -26,8 +26,7 @@ public class HumanPlayer extends AbstractPlayer {
 
     @Override
     public Card getTopCard() {
-        Card returnCard = hand.removeCard();
-        return returnCard;
+        return hand.removeCard();
     }
 
     @Override
