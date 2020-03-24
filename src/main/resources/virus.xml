@@ -12,11 +12,11 @@
     <card>
         <name>corona</name>
         <type>2</type>
-        <infected>50000000</infected>
-        <deaths>5000000</deaths>
-        <incubation>3</incubation>
-        <painfulness>31</painfulness>
-        <panic_level>9</panic_level>
+        <infected>280000</infected>
+        <deaths>10400</deaths>
+        <incubation>6</incubation>
+        <painfulness>35</painfulness>
+        <panic_level>75</panic_level>
     </card>
     <card>
         <name>influenza</name>
