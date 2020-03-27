@@ -22,8 +22,8 @@ import javax.xml.parsers.ParserConfigurationException;
 public class Dealer {
     private final int COUNT_OF_PLAYERS = 2;
     private final int COUNT_OF_ROUNDS = 10;
-    private AbstractView view;
-    private InputManager input;
+    private final AbstractView VIEW;
+    private final InputManager INPUT;
     private DeckController deckController;
     private List<AbstractPlayer> playersList;
     private AbstractPlayer currentPlayer;
@@ -35,8 +35,8 @@ public class Dealer {
     public Dealer() throws FileNotFoundException, CloneNotSupportedException,
                            ParserConfigurationException, SAXException, IOException {
         initializeDeckController();
-        view = new TerminalView();
-        input = new InputManager();
+        VIEW = new TerminalView();
+        INPUT = new InputManager();
         playersList = new ArrayList<>();
         tempStack = new ArrayList<>();
         gameResults = new ArrayList<>();
@@ -55,7 +55,7 @@ public class Dealer {
 
     private void setPlayers(int numberOfPlayers) {
         for (int i = 1; i <= numberOfPlayers; i++) {
-            String name = input.askForName("Player " + i);
+            String name = INPUT.askForName("Player " + i);
             AbstractPlayer player = new HumanPlayer(name);
             playersList.add(player);
         }
@@ -75,19 +75,19 @@ public class Dealer {
 
     private void playGameFor2Players() {
         for (int round = 1; round <= COUNT_OF_ROUNDS; round++) {
-            view.print(String.format("Round number %d! %s's turn to choose!", round, currentPlayer.getName()));
+            VIEW.print(String.format("Round number %d! %s's turn to choose!", round, currentPlayer.getName()));
             Card currentPlayerCard = currentPlayer.getTopCard();
             Card nextPlayerCard = nextPlayer.getTopCard();
-            view.print(currentPlayerCard);
+            VIEW.print(currentPlayerCard);
             manageCardsFight(currentPlayerCard, nextPlayerCard);
-            view.print(currentPlayerCard, nextPlayerCard);
+            VIEW.print(currentPlayerCard, nextPlayerCard);
             changeCurrentPlayer();
         }
         manageEndOfGame();
     }
 
     private void manageCardsFight(Card card1, Card card2) {
-        int statToCompare = input.askForStatToCompare();
+        int statToCompare = INPUT.askForStatToCompare();
         int comparisonResult = compareCards(card1, card2, statToCompare);
         manageCardsAfterRound(card1, card2, comparisonResult);
     }
@@ -126,16 +126,16 @@ public class Dealer {
             roundWinner.takeWonCard(card1);
             roundWinner.takeWonCard(card2);
             pullFromTempStack(roundWinner);
-            view.print(String.format("%s won this round!", roundWinner.getName()));
+            VIEW.print(String.format("%s won this round!", roundWinner.getName()));
         } else {
             tempStack.add(card1);
             tempStack.add(card2);
-            view.print("It's a tie! These two cards will get to the winner of the next round.");
+            VIEW.print("It's a tie! These two cards will get to the winner of the next round.");
         }
     }
     
     private void manageEndOfGame() {
-        view.print("The game is over!");
+        VIEW.print("The game is over!");
         getWinner();
         showGameResults();   
     }
@@ -144,7 +144,7 @@ public class Dealer {
         winner = playersList.get(0);
         for (AbstractPlayer player : playersList) {
             int result = player.getUsedPileCount();
-            view.print(String.format("%s has %d points!", player.getName(), result));
+            VIEW.print(String.format("%s has %d points!", player.getName(), result));
             gameResults.add(result);
             if(result > winner.getUsedPileCount()) {
                 winner = player;
@@ -154,9 +154,9 @@ public class Dealer {
 
     private void showGameResults() {
         if (checkIfTie(gameResults)) {
-            view.print("It's a tie!");
+            VIEW.print("It's a tie!");
         } else {
-            view.print(String.format("The winner of the game is %s! Congratulations!", winner.getName()));
+            VIEW.print(String.format("The winner of the game is %s! Congratulations!", winner.getName()));
         }
     }
 
